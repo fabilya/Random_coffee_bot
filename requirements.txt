@@ -1,0 +1,8 @@
+aiogram==3.4.1
+environs==11.0.0
+redis==5.0.0
+psycopg2-binary==2.9.9
+Django==4.2.4
+python-dotenv~=1.0.1
+apscheduler==3.10.4
+requests==2.31.0
