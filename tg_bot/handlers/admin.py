@@ -51,7 +51,7 @@ async def get_name(message: Message):
 
     if tg_model:
         msg = await message.answer_photo(
-            photo=FSInputFile(tg_model.picture.path.replace('media', 'media/TgUsers')),
+            photo=FSInputFile(tg_model.picture.path),
             caption=ABOUT_USER.format(tg_model=tg_model),
             reply_markup=kb_block_unblock_user(tg_user=tg_model))
         await delete_message(msg)

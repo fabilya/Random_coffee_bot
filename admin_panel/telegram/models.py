@@ -1,10 +1,9 @@
 import logging
-import requests
 
+import requests
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from django.utils.html import mark_safe
 
 from tg_bot.config import BOT_TOKEN
 
@@ -28,7 +27,9 @@ class TgUser(models.Model):
         verbose_name='Имя в телеграмме', max_length=100)
     picture = models.ImageField(
         verbose_name='Фото',
-        upload_to='tg_users',
+        upload_to='photos/',
+        blank=True,
+        null=True,
     )
     bot_unblocked = models.BooleanField(
         verbose_name='Бот разблокирован пользователем', default=True)
@@ -45,10 +46,6 @@ class TgUser(models.Model):
 
     def __str__(self):
         return f'{self.id} {self.enter_full_name}'
-
-    def img_preview(self):
-        return mark_safe(
-            f'<img src = "{self.picture}" width = "300"/>')
 
 
 class Meeting(models.Model):
@@ -113,4 +110,3 @@ def send_notification_on_block(sender, instance, **kwargs):
         else:
             message = "Вас заблокировал администратор"
         send_telegram_message(instance.id, message, BOT_TOKEN)
-

@@ -1,11 +1,10 @@
-import re
 import uuid
 
 from aiogram import Router
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message, UserProfilePhotos
+from aiogram.types import Message
 
-# from tg_bot.config import ALLOWED_DOMAIN
+from admin_panel.django_settings.settings import MEDIA_ROOT
 from tg_bot.db.db_commands import create_tg_user
 from tg_bot.handlers.main_menu import main_menu
 from tg_bot.loader import bot
@@ -38,7 +37,8 @@ async def get_name(message: Message, state: FSMContext):
 
 
 @registration_router.message(Register.get_email)
-async def get_email(message: Message, state: FSMContext):
+async def get_email(message: Message,
+                    state: FSMContext):
     """ Получение почты """
     email = message.text.lower()
     # pattern = rf'^[a-zA-Z0-9._]+' \
@@ -52,22 +52,22 @@ async def get_email(message: Message, state: FSMContext):
     # else:
     context_data = await state.get_data()
     full_name = context_data.get('full_name')
-    filename = uuid.uuid4().hex
-    user_profile_photo: UserProfilePhotos = await bot.get_user_profile_photos(
+
+    user_profile_photo = await bot.get_user_profile_photos(
         message.from_user.id)
     if user_profile_photo.total_count > 0:
         file = await bot.get_file(
-            user_profile_photo.photos[0][-1].file_id)
+            user_profile_photo.photos[0][1].file_id)
         await bot.download_file(
             file_path=file.file_path,
-            destination=f'admin_panel/media/TgUsers/{filename}.jpg')
+            destination=f'{MEDIA_ROOT}/{file.file_path}')
     else:
         print('У пользователя нет фото в профиле.')
     await create_tg_user(
         user=message.from_user,
         email=email,
         enter_full_name=full_name,
-        picture=filename + '.jpg',
+        picture=file.file_path,
     )
     await message.answer(
         'Вы зарегистрированы.')
