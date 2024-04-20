@@ -74,8 +74,8 @@ To administer directly from a telegram bot, you need to enter the command ```/ad
 After entering the user's email, the bot will provide you with user data (first and last name, nickname, full name in tg) and the option to block/unblock or cancel your action.
 
 ## Project authors:
-[Fabiyanskiy Ilya](https://github.com/fabilya)
-[Ten Alexey](https://github.com/aten88)
-[Boyko Maxim](https://github.com/Boikomp)
-[Khlestov Andrey](https://github.com/AndreyKhlestov)
+[Fabiyanskiy Ilya](https://github.com/fabilya)\
+[Ten Alexey](https://github.com/aten88)\
+[Boyko Maxim](https://github.com/Boikomp)\
+[Khlestov Andrey](https://github.com/AndreyKhlestov)\
 [Steblev Konstantin](https://github.com/KonstantinSKS)
