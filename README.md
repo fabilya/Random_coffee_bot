@@ -1,5 +1,6 @@
 # Random_Coffee_Bot
-![screenshot](logo.jpg)
+
+<img alt="screenshot" height="300" src="logo.jpg" width="300"/>
 
 ## Описание
 Проект Random_Coffee_Bot - это телеграм-бот, который каждую неделю (по понедельникам) предлагает встретиться с одним из людей, зарегистрированных в боте в пределах компании.
