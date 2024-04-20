@@ -2,22 +2,22 @@
 
 <img alt="screenshot" height="300" src="logo.jpg" width="300"/>
 
-## Описание
-Проект Random_Coffee_Bot - это телеграм-бот, который каждую неделю (по понедельникам) предлагает встретиться с одним из людей, зарегистрированных в боте в пределах компании.
-Бот делает рассылку с именем и фамилией коллеги, с которым вам нужно организовать встречу. Участники выбираются случайным образом, поэтому вы сможете выпить кофе с теми, с кем еще не пересекались по работе. Подтвержать встречи не нужно, участие по желанию.
+## Description
+The Random_Coffee_Bot project is a telegram bot that every week (on Mondays) offers to meet with one of the people registered in the bot within the company.
+The bot sends out a newsletter with the first and last name of a colleague with whom you need to organize a meeting. Participants are selected randomly, so you can have coffee with people you haven’t met yet at work. There is no need to confirm meetings, participation is optional.
 
-В боте Random_Coffee_Bot реализовано:
-- Регистрация пользователей (при регистрации происходит проверка уникальности домена почты, т.е. зарегистрироваться могут только сотрудники компании).
-- Хранение данных пользователей в БД Postgres. Функции работы с БД реализованы асинхронно для повышения производительности.
-- использование библиотеки и сервера Redis для кэширования данных, повышения производительности и отказоустойчивости бота.
-- Каждый пользователь может приостановить или возобновить участие в рассылках для встреч.
-- Автоматические еженедельные рассылки (по понедельникам).
-- Смена людей случайным образом, исключая повторения. Алгоритм подбора партнера по кофе устроен так, чтобы исключить повторения. Повторение партнеров возможно только в том случае, если человек уже со всеми повстречался, и с момента последней встречи прошло более полугода.
-- Администрирование выполнено двумя способами:
-  1. Админ-панель Django (доступ через web-интерфес по адресу: http:+ ip вашего сервера)
-  2. Напрямую из телеграм-бота (позволяет блокировать или разблокировать пользователя по его почте).
+The Random_Coffee_Bot bot implements:
+- User registration (during registration, the uniqueness of the email domain is checked, i.e. only company employees can register).
+- Storing user data in a Postgres database. Functions for working with the database are implemented asynchronously to improve performance.
+- use of the Redis library and server to cache data, improve performance and fault tolerance of the bot.
+- Each user can pause or resume participation in mailing lists for meetings.
+- Automatic weekly newsletters (on Mondays).
+- Changing people randomly, excluding repetitions. The algorithm for selecting a coffee partner is designed to eliminate repetition. Repeating partners is possible only if the person has already met everyone, and more than six months have passed since the last meeting.
+- Administration is performed in two ways:
+  1. Django admin panel (access via web interface at: http:+ ip of your server)
+  2. Directly from the telegram bot (allows you to block or unblock a user by his email).
 
-## Технолгии
+## Technologies
 - Python 3.9
 - Aiogram 3.4
 - Redis 5.0
@@ -26,56 +26,56 @@
 - PostgreSQL 13.10
 - Requests 2.31
 
-## Запуск проекта
-Выполнить установку проект Random_Coffee_Bot на ваш сервер.
+## Launch of the project
+Install the Random_Coffee_Bot project on your server.
 
-В корневой директории проекта <ваш_сервер>/:~random_coffee_bot_andrey создайте файл с переменными окружения .env.
-Для этого введите команду: ``` sudo touch .env```.
-Далее откройте .env-файл с помощью команды ```sudo nano .env``` и заполните его данными по следующему образцу:
+In the root directory of the project <your_server>/:~random_coffee_bot_andrey, create a file with environment variables .env.
+To do this, enter the command: ``` sudo touch .env```.
+Next, open the .env file using the command ```sudo nano .env``` and fill it with data as follows:
 
 ```
-# Переменные для PostgreSQL
+# Variables for PostgreSQL
 POSTGRES_DB=test_db
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 DB_HOST=db
 DB_PORT=5432
 
-# Переменные для Django-проекта:
+# Variables for Django project:
 SECRET_KEY='django-insecure-7f8jl#&fox9p+zm7@e2!8q66&+%+ex94vwe4razd8t5x+g5!qk'
 DEBUG=False
 HOST_IP='158.160.16.218'
 
-# Переменные для телеграм ботa
-BOT_TOKEN=ваш токен для бота
+# Variables for telegram bot
+BOT_TOKEN=your bot token
 REDIS_HOST=redis
 REDIS_PORT=6379
 ALLOWED_DOMAIN=@groupeseb
 ```
 
-### Обращаем Ваше внимание, что BOT_TOKEN вы должны получить заранее самостоятельно при создании и регистрации бот-чата
-### в телеграм сервисе по созданию ботов https://t.me/BotFather
+### Please note that you must obtain BOT_TOKEN yourself in advance when creating and registering a bot chat
+### in the telegram service for creating bots https://t.me/BotFather
 
-## Использование телеграм-бота:
-- Для начала работы перейдите в чат Random_Coffee_Bot, нажмите кнопку "Menu" и затем всплывающую кнопку "/start".
-- Если вы еще не зарегистрированы, то бот предложит вам ввести свои имя и фамилию. После ввода имени и фамилии введите свою корпоративную почту. После успешной регистрации бот ответит вам сообщением "Вы зарегистрированы"
-- После регистрации вы автоматически становитесь участником в рассылках для встреч.
-- Если вы не хотите продолжать участие, нажмите кнопку "Приостановить участие". Если же вы желаете продолжить участие,  нажмите кнопку "Возобновить участие".
+## Using a telegram bot:
+- To get started, go to the Random_Coffee_Bot chat, click the "Menu" button and then the "/start" pop-up button.
+- If you have not yet registered, the bot will prompt you to enter your first and last name. After entering your first and last name, enter your corporate email. After successful registration, the bot will respond to you with the message “You are registered”
+- Once you register, you automatically become a member of the meeting mailing lists.
+- If you do not want to continue participating, click the "Suspend participation" button. If you would like to continue participating, click the “Resume Participation” button.
 
-## Администрирование в админ-панели Django:
-Админ-панель Django доступна по адресу: http:+ ip вашего сервера.
-При наличии прав администратора в админ-панели доступны следующие возможности:
-- Просмотр и управление пользователями чата. Управление включает в себя блокировку/разблокировку пользователя, назначение прав администратора, активизация/деактивизация пользователя, изменение почты и изменение введенного пользователем имени и фамилии, а также удаление пользователя.
-- Просмотр и удаление встреч, назначенных телеграм-ботом.
-- Просмотр и управление рассылками. Администратор может создавать, редактировать или удалять рассылки. При создании или редактировании рассылки указывается текст, дата и время рассылки.
+## Administration in the Django admin panel:
+The Django admin panel is available at: http:+ ip of your server.
+If you have administrator rights, the following options are available in the admin panel:
+- View and manage chat users. Management includes blocking/unblocking the user, assigning administrator rights, activating/deactivating the user, changing mail and changing the user's first and last name, as well as deleting the user.
+- View and delete meetings scheduled by the telegram bot.
+- View and manage mailings. The administrator can create, edit or delete mailings. When creating or editing a mailing, the text, date and time of the mailing are indicated.
 
-## Администрирование из телеграм-бота:
-Для администрирования напрямую из телеграм-бота необходимо ввести команду ```/admin```. После этого бот предложит доступ к административным функциям через сайт админ-панели (см. выше) или ввести почту пользователя для его блокировки/разблокировки.
-После ввода почты пользователя бот предоставит вам данные пользователя (имя и фамилия, никнейм, полное имя в тг) и вариант заблокировать/разблокировать или отменить ваше действие.
+## Administration from a telegram bot:
+To administer directly from a telegram bot, you need to enter the command ```/admin```. After this, the bot will offer access to administrative functions through the admin panel website (see above) or enter the user’s email to block/unblock him.
+After entering the user's email, the bot will provide you with user data (first and last name, nickname, full name in tg) and the option to block/unblock or cancel your action.
 
-## Авторы проекта:
-Тен Алексей\
-Бойко Максим\
-Хлестов Андрей\
-Фабиянский Илья\
-Стеблев Константин
+## Project authors:
+[Fabiyanskiy Ilya](https://github.com/fabilya)
+[Ten Alexey](https://github.com/aten88)
+[Boyko Maxim](https://github.com/Boikomp)
+[Khlestov Andrey](https://github.com/AndreyKhlestov)
+[Steblev Konstantin](https://github.com/KonstantinSKS)
