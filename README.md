@@ -29,7 +29,7 @@ The Random_Coffee_Bot bot implements:
 ## Launch of the project
 Install the Random_Coffee_Bot project on your server.
 
-In the root directory of the project <your_server>/:~random_coffee_bot_andrey, create a file with environment variables .env.
+In the root directory of the project <your_server>/:~random_coffee_bot, create a file with environment variables .env.
 To do this, enter the command: ``` sudo touch .env```.
 Next, open the .env file using the command ```sudo nano .env``` and fill it with data as follows:
 
